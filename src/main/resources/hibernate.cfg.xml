@@ -24,7 +24,7 @@
         <!--<mapping resource="Car.hbm.xml"/>-->
         <!--<mapping resource="Mechanic.hbm.xml"/>-->
         <!--<mapping resource="ServiceStation.hbm.xml"/>-->
-
+<!---->
         <mapping class="ua.mykytenko.model.Car"/>
         <mapping class="ua.mykytenko.model.Mechanic"/>
         <mapping class="ua.mykytenko.model.ServiceStation"/>
