@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ua.mykytenko.model.Car" table="cars">
+        <meta attribute="class-description">
+            This class contains the car detail.
+        </meta>
+        <id name="id" type="int" column="id">
+            <generator class="increment"/>
+        </id>
+        <property name="model" column="model" type="string"/>
+        <property name="maker" column="maker" type="string"/>
+        <property name="engineId" column="engine_id" type="int"/>
+        <property name="makeDate" column="make_date" type="java.util.Date"/>
+        <property name="price" column="price" type="int"/>
+
+        <set name="serviceStations" table="service_stations_clients" lazy="true" fetch="join">
+            <key column="car_id"/>
+            <many-to-many column="service_station_id" class="ua.mykytenko.model.ServiceStation"/>
+        </set>
+    </class>
+</hibernate-mapping>
