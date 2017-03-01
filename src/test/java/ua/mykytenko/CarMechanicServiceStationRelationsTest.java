@@ -66,13 +66,24 @@ public class CarMechanicServiceStationRelationsTest {
 
     @Test
     public void testServiceStationInMechanic(){
-        Mechanic mechanic = mechanicDAO.getMechanicById(2);
-        ServiceStation ss = mechanic.getServiceStation();
-        Set<Mechanic> mechanics = ss.getMechanics();
-        mechanics.remove(mechanic);
-        ss.setMechanics(mechanics);
+        Mechanic mech = mechanicDAO.getMechanicById(2);
+        ServiceStation ss = mech.getServiceStation();
+        Set<Mechanic> mechanicSet = ss.getMechanics();
+        mechanicSet.remove(mech);
+        ss.setMechanics(mechanicSet);
         stationDAO.updateServiceStation(ss);
         Assert.assertNull(mechanicDAO.getMechanicById(2).getServiceStation());
     }
 
+    @Test
+    public void testServiceStationInMechanicToNull(){
+        Mechanic mBefore = mechanicDAO.getMechanicById(2);
+        ServiceStation ssBefore = mBefore.getServiceStation();
+        int countMechsBefore = ssBefore.getMechanics().size();
+        mBefore.setServiceStation(null);
+        mechanicDAO.updateMechanic(mBefore);
+        ServiceStation ssAfter = stationDAO.getServiceStationById(ssBefore.getId());
+        int countMechAfter = ssAfter.getMechanics().size();
+        Assert.assertEquals(countMechsBefore - countMechAfter, 1);
+    }
 }
